@@ -1,0 +1,92 @@
+1
+00:00:01,600 --> 00:00:05,520
+Chào mọi người, tôi muốn cho các bạn xem nhanh
+
+2
+00:00:05,680 --> 00:00:09,360
+những gì chúng tôi đang xây dựng cho cộng đồng Automation Squad.
+
+3
+00:00:09,520 --> 00:00:13,040
+Nếu bạn muốn giá trị tức thì miễn phí,
+
+4
+00:00:14,320 --> 00:00:20,050
+chúng tôi đã tập hợp rất nhiều thứ, kể cả bản tin hàng ngày.
+
+5
+00:00:20,050 --> 00:00:25,120
+Nó sẽ nói về các lệnh và mẹo hữu ích.
+
+6
+00:00:25,920 --> 00:00:34,060
+Và cả những tin tức mới nhất,
+nhưng chúng tôi sẽ giải thích tại sao bạn nên quan tâm.
+
+7
+00:00:34,560 --> 00:00:43,060
+Và ai nên quan tâm? Vấn đề này giải quyết gì,
+ví dụ nếu đó là một công cụ?
+
+8
+00:00:43,560 --> 00:00:50,220
+Và các lệnh của chúng tôi rất phức tạp,
+chứ không phải mấy thứ cơ bản.
+
+9
+00:00:50,720 --> 00:00:53,820
+Mấy thứ mà bạn có thể thấy ở mọi nơi. Vậy nên hãy xem thử.
+
+10
+00:00:54,320 --> 00:00:58,820
+Và nếu bạn vào phần lớp học,
+
+11
+00:00:59,320 --> 01:02,970
+chúng tôi có các mẫu tự động hóa N8N,
+
+12
+00:01:03,290 --> 01:07,250
+lệnh và công cụ. Nếu bạn vào đây,
+
+13
+00:01:07,750 --> 01:12,170
+đây là vô số mẫu tự động hóa N8N
+
+14
+00:01:12,330 --> 01:19,770
+mà chúng tôi đã tìm thấy trên Internet
+và tập hợp lại ở đây.
+
+15
+00:01:20,270 --> 01:24,050
+Có hàng ngàn mẫu, tất cả đều miễn phí.
+
+16
+00:01:24,550 --> 01:32,700
+nhưng chúng nằm rải rác khắp nơi.
+
+17
+00:01:33,200 --> 01:36,020
+Vì vậy, chúng tôi đã tập hợp chúng lại cho bạn.
+
+18
+00:01:37,060 --> 01:40,820
+Và nếu bạn quay lại, bạn sẽ thấy các lệnh và công cụ.
+
+19
+00:01:40,980 --> 01:45,100
+Và đây là những lệnh phức tạp
+
+20
+00:01:45,600 --> 01:54,300
+mà chúng tôi thích xây dựng và những cái chúng tôi đã tìm thấy
+và mua, được phép cung cấp miễn phí.
+
+21
+00:01:54,800 --> 01:57,940
+Và Tools là danh mục các công cụ tuyệt vời.
+
+22
+00:01:58,440 --> 02:01,680
+Vậy nên, hãy xem thử nhé. Hy vọng các bạn thích nó.

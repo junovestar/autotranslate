@@ -1,0 +1,127 @@
+1
+00:00:01,600 --> 00:00:05,120
+Chào mọi người, mình muốn cho bạn xem nhanh
+
+2
+00:00:05,620 --> 00:00:09,360
+về cộng đồng trường học Automation Squad.
+
+3
+00:00:09,520 --> 00:00:13,040
+Nếu bạn muốn giá trị tức thì miễn phí,
+
+4
+00:00:14,320 --> 00:00:18,000
+chúng tôi đã tập hợp rất nhiều thứ.
+
+5
+00:00:18,500 --> 00:00:21,800
+Chúng tôi có bản tin hàng ngày.
+
+6
+00:00:22,300 --> 00:00:25,120
+Nó sẽ nói về các lệnh,
+
+7
+00:00:25,920 --> 00:00:29,200
+mẹo hay, và cả những thứ mới nhất.
+
+8
+00:00:29,440 --> 00:00:32,460
+Những gì đang diễn ra gần đây.
+
+9
+00:00:32,860 --> 00:00:37,260
+Nhưng ta sẽ biết tại sao bạn nên quan tâm và
+
+10
+00:00:38,620 --> 00:00:41,900
+ai nên quan tâm. Vấn đề
+
+11
+00:00:41,980 --> 00:00:45,540
+này giải quyết gì? Nếu đó là một công cụ.
+
+12
+00:00:46,040 --> 00:00:49,340
+Và các lệnh của chúng tôi rất phức tạp,
+
+13
+00:00:49,580 --> 00:00:52,140
+không phải thứ cơ bản ngoài kia
+
+14
+00:00:52,140 --> 00:00:54,000
+mà bạn có thể tìm thấy ở khắp mọi nơi.
+
+15
+00:00:54,000 --> 00:00:56,660
+Hãy xem thử nhé.
+
+16
+00:00:57,160 --> 00:01:01,290
+Và nếu bạn vào phần lớp học,
+
+17
+00:01:01,530 --> 00:01:05,130
+chúng tôi có mẫu tự động hóa N8N, lệnh và công cụ.
+
+18
+00:01:05,930 --> 00:01:09,850
+Nếu bạn vào đây, có rất nhiều
+
+19
+00:01:10,010 --> 00:01:13,850
+mẫu tự động hóa N8N
+
+20
+00:01:14,350 --> 00:01:19,050
+mà chúng tôi đã tìm thấy trên Internet và
+
+21
+00:01:19,550 --> 00:01:24,050
+đặt tất cả vào một chỗ. Có hàng ngàn
+
+22
+00:01:24,550 --> 00:01:28,010
+mẫu miễn phí. Những mẫu này vốn có sẵn
+
+23
+00:01:28,250 --> 00:01:32,700
+miễn phí, nhưng chúng nằm rải rác.
+
+24
+00:01:33,200 --> 00:01:36,020
+Nên chúng tôi gom lại một chỗ cho bạn.
+
+25
+00:01:37,060 --> 00:01:40,820
+Và nếu bạn quay lại, bạn có lệnh và công cụ
+
+26
+00:01:40,980 --> 00:01:44,420
+và đây đều là các lệnh phức tạp
+
+27
+00:01:44,580 --> 00:01:48,180
+mà chúng tôi thích xây dựng và những cái đã tìm
+
+28
+00:01:48,680 --> 00:01:52,340
+và mua, được phép cung cấp miễn phí.
+
+29
+00:01:52,820 --> 00:01:56,740
+Và Công cụ là một thư mục công cụ tuyệt vời.
+
+30
+00:01:57,240 --> 00:01:59,110
+Dù sao thì, hãy xem thử.
+
+31
+00:01:59,110 --> 00:02:00,980
+Mong là các bạn sẽ thích nó.
+
+32
+00:02:01,480 --> 00:02:01,680
+Cho chúng tôi biết nhé.

@@ -1,0 +1,86 @@
+1
+00:00:01,600 --> 00:00:05,120
+Chào mọi người, mình muốn khoe nhanh cái này.
+
+2
+00:00:05,620 --> 00:00:08,720
+
+3
+00:00:09,220 --> 00:00:14,960
+Nếu bạn muốn giá trị tức thì miễn phí, chúng tôi đã tập hợp rất nhiều thứ.
+
+4
+00:00:17,470 --> 00:00:19,480
+Chúng tôi có bản tin hàng ngày.
+
+5
+00:00:19,980 --> 00:00:25,120
+Nó sẽ nói về các gợi ý, mẹo hay và cả
+
+6
+00:00:25,920 --> 00:00:32,460
+những tin tức mới nhất, kèm lý do bạn nên quan tâm và
+
+7
+00:00:32,860 --> 00:00:42,300
+ai nên quan tâm, vấn đề được giải quyết là gì? Nếu đó là một công cụ.
+
+8
+00:00:42,800 --> 00:00:46,300
+Gợi ý của chúng tôi rất phức tạp,
+
+9
+00:00:46,800 --> 00:00:54,460
+không phải thứ cơ bản bạn có thể tìm thấy ở mọi nơi. Hãy xem thử nhé.
+
+10
+00:00:54,540 --> 00:00:58,140
+Ngoài ra, nếu bạn vào phần lớp học
+
+11
+00:00:58,220 --> 00:01:05,130
+chúng tôi có mẫu tự động hóa N8N, gợi ý và công cụ.
+
+12
+00:01:05,930 --> 00:01:09,850
+Nếu bạn vào đây, sẽ thấy rất nhiều
+
+13
+00:01:10,010 --> 00:01:13,850
+mẫu tự động hóa N8N.
+
+14
+00:01:14,350 --> 00:01:24,050
+Chúng tôi đã tìm trên mạng và tập hợp lại ở đây. Có hàng ngàn mẫu.
+
+15
+00:01:24,550 --> 00:01:28,610
+Tất cả đều miễn phí. Chúng vốn dĩ
+
+16
+00:01:29,110 --> 00:01:32,700
+đã miễn phí, nhưng rải rác khắp nơi.
+
+17
+00:01:33,200 --> 00:01:36,020
+Chúng tôi đã tập hợp lại cho bạn.
+
+18
+00:01:37,060 --> 00:01:44,420
+Nếu bạn quay lại, bạn có gợi ý và công cụ, đều là những gợi ý phức tạp.
+
+19
+00:01:44,580 --> 00:01:52,340
+Chúng tôi thích xây dựng và cả những thứ chúng tôi đã mua để cung cấp miễn phí.
+
+20
+00:01:52,820 --> 00:01:56,740
+Còn Tools là thư mục công cụ tuyệt vời.
+
+21
+00:01:57,240 --> 00:02:00,500
+Hãy xem thử nhé. Hy vọng các bạn thích nó.
+
+22
+00:02:01,000 --> 00:02:01,680
+Cho chúng tôi biết nhé.

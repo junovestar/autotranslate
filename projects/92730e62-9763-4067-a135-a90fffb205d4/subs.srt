@@ -1,0 +1,119 @@
+1
+00:00:01,600 --> 00:00:04,720
+Hey guys, just wanted to show you
+
+2
+00:00:05,220 --> 00:00:09,360
+real quick that we have been working on the Automation Squad
+
+3
+00:00:09,520 --> 00:00:13,040
+school community. So if you want free
+
+4
+00:00:14,320 --> 00:00:17,800
+instant value, we've been putting a
+
+5
+00:00:18,300 --> 00:00:20,050
+lot of stuff together. So we've got our daily newsletter.
+
+6
+00:00:20,050 --> 00:00:21,800
+It's going
+
+7
+00:00:22,300 --> 00:00:25,120
+to talk about prompts,
+
+8
+00:00:25,920 --> 00:00:29,800
+actionable tips, and also like
+
+9
+00:00:30,300 --> 00:00:34,060
+kind of the latest of what's going going on. But we break it down
+
+10
+00:00:34,560 --> 00:00:39,020
+with like, why you should care and like,
+
+11
+00:00:39,820 --> 00:00:43,060
+who should care. What problem does this solve?
+
+12
+00:00:43,560 --> 00:00:47,020
+Like if it's a tool. And then our prompts are like super
+
+13
+00:00:47,180 --> 00:00:50,980
+complex, so they're not like really basic stuff that you
+
+14
+00:00:51,480 --> 00:00:55,100
+can find everywhere. So check that out. And then
+
+15
+00:00:55,600 --> 00:00:59,500
+also if you go over to the classroom section, we've got
+
+16
+00:01:00,490 --> 00:01:04,330
+N8N automation templates, prompts and
+
+17
+00:01:04,410 --> 00:01:07,810
+tools. So if you go in
+
+18
+00:01:08,310 --> 00:01:12,170
+here, these are tons of N8N
+
+19
+00:01:12,330 --> 00:01:16,090
+automation templates that we have found
+
+20
+00:01:16,170 --> 00:01:19,770
+across the Internet and put all
+
+21
+00:01:20,270 --> 00:01:24,250
+into one spot here. So there's literally thousands of
+
+22
+00:01:24,750 --> 00:01:28,970
+them, all for free. These are ones that are available for free
+
+23
+00:01:29,860 --> 00:01:33,940
+out there, but they're just like scattered. And so we
+
+24
+00:01:34,440 --> 00:01:38,020
+put them all in one place for you. And then if you go
+
+25
+00:01:38,520 --> 00:01:43,100
+back here, you've got prompts and tools and these are all just
+
+26
+00:01:43,600 --> 00:01:47,780
+like those complex prompts that we like to build and ones that we found
+
+27
+00:01:47,860 --> 00:01:51,620
+and bought as well that we're allowed to offer
+
+28
+00:01:52,120 --> 00:01:55,980
+for free. And then Tools is like a really great tools
+
+29
+00:01:56,480 --> 00:01:59,900
+directory. So anyways, check it out. I hope you guys
+
+30
+00:02:00,400 --> 00:02:01,680
+enjoy it. Let us know what thing.

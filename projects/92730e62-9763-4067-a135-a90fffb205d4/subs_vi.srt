@@ -1,0 +1,107 @@
+1
+00:00:01,600 --> 00:00:04,720
+Chào mọi người, mình chỉ muốn cho bạn xem
+
+2
+00:00:05,220 --> 00:00:09,360
+rất nhanh về cộng đồng trường học Automation Squad.
+
+3
+00:00:09,520 --> 00:00:13,040
+Vậy nếu bạn muốn giá trị tức thì miễn phí,
+
+4
+00:00:14,320 --> 00:00:20,050
+chúng tôi đã tập hợp rất nhiều thứ, gồm cả bản tin hàng ngày.
+
+5
+00:00:20,050 --> 00:00:21,800
+Nó sẽ
+
+6
+00:00:22,300 --> 00:00:25,120
+nói về các lệnh,
+
+7
+00:00:25,920 --> 00:00:29,800
+mẹo hữu ích, và cả những
+
+8
+00:00:30,300 --> 00:00:34,060
+cập nhật mới nhất về những gì đang diễn ra.
+
+9
+00:00:34,560 --> 00:00:43,060
+Nhưng ta chia nhỏ nó ra với lý do bạn nên quan tâm, ai nên quan tâm, và nó giải quyết vấn đề gì?
+
+10
+00:00:43,560 --> 00:00:47,020
+Ví dụ nếu đó là một công cụ. Và các lệnh của ta thì rất
+
+11
+00:00:47,180 --> 00:00:51,100
+phức tạp, không phải là những thứ cơ bản bạn có thể tìm thấy ở khắp mọi nơi.
+
+12
+00:00:51,480 --> 00:00:55,100
+Vậy hãy xem nhé. Và sau đó
+
+13
+00:00:55,600 --> 00:00:59,500
+nếu bạn vào phần lớp học, ta có
+
+14
+00:01:00,490 --> 00:01:04,330
+mẫu tự động hóa N8N, lệnh và
+
+15
+00:01:04,410 --> 00:01:07,810
+công cụ. Nếu bạn vào
+
+16
+00:01:08,310 --> 00:01:12,170
+đây, đây là rất nhiều mẫu
+
+17
+00:01:12,330 --> 00:01:16,090
+tự động hóa N8N mà ta đã tìm thấy
+
+18
+00:01:16,170 --> 00:01:24,250
+trên Internet và tập hợp tất cả vào một chỗ ở đây. Có hàng ngàn mẫu,
+
+19
+00:01:24,750 --> 00:01:28,970
+tất cả đều miễn phí. Đây là những mẫu miễn phí
+
+20
+00:01:29,860 --> 00:01:33,940
+ngoài kia, nhưng chúng rải rác.
+
+21
+00:01:34,440 --> 00:01:38,020
+Vậy nên ta đã đặt chúng vào một chỗ cho bạn.
+
+22
+00:01:38,520 --> 00:01:43,100
+Và sau đó nếu bạn quay lại đây, bạn có lệnh và công cụ
+
+23
+00:01:43,600 --> 00:01:47,780
+và đây là những lệnh phức tạp mà ta thích tạo
+
+24
+00:01:47,860 --> 00:01:51,620
+và những lệnh ta đã tìm và mua
+
+25
+00:01:52,120 --> 00:01:55,980
+mà ta được phép cung cấp miễn phí.
+
+26
+00:01:56,480 --> 00:01:59,900
+Và Công cụ giống như một thư mục công cụ tuyệt vời.
+
+27
+00:01:59,900 --> 00:02:01,680
+Vậy nên, hãy xem nhé.

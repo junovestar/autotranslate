@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Translate Video - Web Version</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress-container {
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .steps-container {
+            margin-top: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border-left: 4px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+
+        .step.completed {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .step.running {
+            background: #cce7ff;
+            border-left-color: #007bff;
+        }
+
+        .step.error {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+
+        .step-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .step.completed .step-icon {
+            background: #28a745;
+            color: white;
+        }
+
+        .step.running .step-icon {
+            background: #007bff;
+            color: white;
+            animation: spin 1s linear infinite;
+        }
+
+        .step.error .step-icon {
+            background: #dc3545;
+            color: white;
+        }
+
+        .step-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .step-text {
+            flex: 1;
+        }
+
+        .retry-btn {
+            background: #ffc107;
+            color: #212529;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .retry-btn:hover {
+            background: #e0a800;
+        }
+
+        .retry-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .projects-container {
+            grid-column: 1 / -1;
+        }
+        
+        .queue-status {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .queue-status h3 {
+            margin: 0 0 10px 0;
+            color: #1976d2;
+        }
+        
+        .queue-info {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+        }
+        
+        .queue-info span {
+            background: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .project-queue-position {
+            background: #ff9800;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            border: 2px solid transparent;
+            border-left: 5px solid #667eea;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .project-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .project-status {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-running {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-stopped {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .project-url {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            word-break: break-all;
+        }
+
+        .download-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #218838;
+            transform: translateY(-1px);
+        }
+
+        .download-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .restart-btn {
+            background: #17a2b8;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            background: #138496;
+            transform: translateY(-1px);
+        }
+
+        .restart-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        
+        .stop-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .stop-btn:hover {
+            background: #c82333;
+            transform: translateY(-1px);
+        }
+        
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .delete-btn:hover {
+            background: #c82333;
+            transform: translateY(-1px);
+        }
+        
+        .project-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .settings-toggle {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .settings-toggle:hover {
+            background: #5a6268;
+        }
+
+        .settings-panel {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .settings-panel.show {
+            display: block;
+        }
+        
+        .setting-section {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .setting-section h4 {
+            margin: 0 0 15px 0;
+            color: #495057;
+            font-size: 16px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .form-group small {
+            display: block;
+            color: #6c757d;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .warning-message {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ffeaa7;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 Auto Translate Video</h1>
+            <p>Tự động dịch video từ YouTube, TikTok và các nền tảng khác</p>
+        </div>
+
+        <button class="settings-toggle" onclick="toggleSettings()">⚙️ Cài đặt</button>
+        
+        <div class="settings-panel" id="settingsPanel">
+            <h2>Cài đặt API</h2>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>TTS Provider</label>
+                    <select id="ttsProvider">
+                        <option value="fpt">FPT AI (Mặc định)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>🔑 FPT AI API Keys (nhiều keys, mỗi key một dòng)</label>
+                    <textarea id="fptApiKeys" rows="3" placeholder="Nhập các API keys, mỗi key một dòng:&#10;ffFujWkLFqAAZbEu5O3Fy1eplKiOVtGW&#10;key2_here&#10;key3_here"></textarea>
+                    <small>Hệ thống sẽ tự động chuyển key khi key hiện tại hết credit</small>
+                </div>
+                <div class="form-group">
+                    <label>FPT AI Voice</label>
+                    <select id="fptVoice">
+                        <option value="banmai">Ban Mai (Nữ - Miền Bắc)</option>
+                        <option value="lannhi">Lan Nhi (Nữ - Miền Nam)</option>
+                        <option value="leminh">Lê Minh (Nam - Miền Bắc)</option>
+                        <option value="myan">Mỹ An (Nữ - Miền Trung)</option>
+                        <option value="thuminh">Thu Minh (Nữ - Miền Bắc)</option>
+                        <option value="giahuy">Gia Huy (Nam - Miền Trung)</option>
+                        <option value="linhsan">Linh San (Nữ - Miền Nam)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>FPT AI Speed</label>
+                    <select id="fptSpeed">
+                        <option value="">Mặc định</option>
+                        <option value="-3">-3 (Chậm nhất)</option>
+                        <option value="-2">-2</option>
+                        <option value="-1">-1</option>
+                        <option value="0">0 (Bình thường)</option>
+                        <option value="1">+1</option>
+                        <option value="2">+2</option>
+                        <option value="3">+3 (Nhanh nhất)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>FPT AI Speech Speed (Tốc độ nói)</label>
+                    <input type="number" id="fptSpeechSpeed" min="0.5" max="2.0" step="0.1" value="0.8" placeholder="0.8">
+                    <small>Tốc độ nói của giọng đọc (0.5-2.0, 1.0 = bình thường, 0.8 = hơi chậm)</small>
+                </div>
+                <div class="form-group">
+                    <label>FPT AI Format</label>
+                    <select id="fptFormat">
+                        <option value="mp3">MP3 (Mặc định)</option>
+                        <option value="wav">WAV</option>
+                    </select>
+                </div>
+                <!-- AI Translation Section -->
+                <div class="setting-section">
+                    <h4>🤖 AI Dịch thuật</h4>
+                    <div class="form-group">
+                        <label>🔑 Google Gemini API Key (tùy chọn)</label>
+                        <input type="password" id="geminiApiKey" placeholder="Nhập API key của Gemini (để trống để dùng backup keys)">
+                        <small>Sử dụng để dịch thuật và cải thiện SRT. Nếu để trống, hệ thống sẽ tự động dùng các backup keys có sẵn.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>📋 Backup API Keys (tự động)</label>
+                        <div style="background: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 12px;">
+                            <p><strong>Hệ thống có sẵn 4 backup keys:</strong></p>
+                            <ul style="margin: 5px 0; padding-left: 20px;">
+                                <li>Backup Key 1: AIzaSyClZFBCA_uXJLwBYG0rV3j0-flFEH6SyOU</li>
+                                <li>Backup Key 2: AIzaSyAkrlcnwqDuWci9Djgve3bVoYJYTACKLDw</li>
+                                <li>Backup Key 3: AIzaSyBXe18Cq2S97Pc7o7pvdL9tXzEabcKN5X4</li>
+                                <li>Backup Key 4: AIzaSyDk2UHw8Pghh8ROMAesrYCxv5bHuHsIrRM</li>
+                            </ul>
+                            <p style="margin: 5px 0; color: #666;"><em>Hệ thống sẽ tự động chuyển key khi key hiện tại hết quota hoặc lỗi.</em></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>AssemblyAI API Key</label>
+                    <input type="password" id="assemblyaiApiKey" placeholder="Nhập API key...">
+                </div>
+                <div class="form-group">
+                    <label>Ngôn ngữ STT</label>
+                    <select id="sttLanguage">
+                        <option value="en">Tiếng Anh</option>
+                        <option value="vi">Tiếng Việt</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Phương pháp STT</label>
+                    <select id="sttMethod">
+                        <option value="utterances">Utterances (Câu hoàn chỉnh từ AssemblyAI - Mặc định)</option>
+                        <option value="srt">SRT (Ổn định)</option>
+                        <option value="json">JSON (Xử lý tùy chỉnh)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Số ký tự mỗi caption (SRT)</label>
+                    <input type="number" id="sttCharsPerCaption" min="20" max="500" value="200">
+                </div>
+                <div class="form-group">
+                    <label>Ngưỡng phát hiện speech (0.0-1.0)</label>
+                    <input type="number" id="sttSpeechThreshold" min="0" max="1" step="0.1" value="0.5">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="sttDisfluencies"> Loại bỏ filler words (um, uh, ah)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="useAiSegmentation"> Sử dụng AI cải thiện câu (Khuyến nghị)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Độ dài tối thiểu câu (từ)</label>
+                    <input type="number" id="minSentenceLength" min="5" max="50" value="20">
+                </div>
+                <div class="form-group">
+                    <label>Độ dài tối đa câu (từ)</label>
+                    <input type="number" id="maxSentenceLength" min="50" max="300" value="150">
+                </div>
+                
+                <!-- Silence Remover Section -->
+                <div class="setting-section">
+                    <h4>🔇 Cắt khoảng lặng</h4>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="enableSilenceRemoval" checked> 
+                            ✂️ Bật tính năng cắt khoảng lặng
+                        </label>
+                        <small>Tự động cắt các khoảng lặng trong video để rút ngắn thời lượng</small>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Ngưỡng âm thanh (dB)</label>
+                            <input type="number" id="silenceThreshold" min="-100" max="0" step="1" value="-50">
+                            <small>Âm thanh dưới ngưỡng này được coi là khoảng lặng</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Thời gian tối thiểu (giây)</label>
+                            <input type="number" id="minSilenceDuration" min="0.1" max="2" step="0.1" value="0.4">
+                            <small>Khoảng lặng tối thiểu để cắt</small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Thời gian tối đa cắt (giây)</label>
+                            <input type="number" id="maxSilenceDuration" min="1" max="10" step="0.5" value="2.0">
+                            <small>Khoảng lặng > 2s sẽ không bị cắt</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Padding (giây)</label>
+                            <input type="number" id="silencePadding" min="0" max="1" step="0.05" value="0.1">
+                            <small>Thời gian giữ lại sau khi cắt</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proxy Settings -->
+                <div class="setting-section">
+                    <h4>🌐 Cấu hình Proxy</h4>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="proxyEnabled"> 
+                            🔗 Bật Proxy
+                        </label>
+                        <small>Sử dụng proxy cho tất cả requests API</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Proxy Config</label>
+                        <input type="text" id="proxyConfig" placeholder="160.30.191.8:14010:XiSAmJ:jDLPbn">
+                        <small>Format: IP:PORT:USER:PASS hoặc IP:PORT (không auth)</small>
+                    </div>
+                </div>
+            </div>
+            <button class="btn" onclick="saveSettings()">💾 Lưu cài đặt</button>
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>🚀 Bắt đầu dự án mới</h2>
+                <div class="form-group">
+                    <label>Tên dự án (tùy chọn)</label>
+                    <input type="text" id="projectName" placeholder="Nhập tên dự án hoặc để trống để tự động đặt tên">
+                </div>
+                <div class="form-group">
+                    <label>URL Video</label>
+                    <input type="url" id="videoUrl" placeholder="Nhập URL YouTube, TikTok, hoặc link video trực tiếp...">
+                </div>
+                
+                <div class="form-group">
+                    <label>Nhạc nền (tùy chọn)</label>
+                    <input type="file" id="musicFile" accept="audio/*">
+                </div>
+                
+                <div class="form-group">
+                    <label>Overlay (tùy chọn)</label>
+                    <input type="file" id="overlayFile" accept="video/*">
+                </div>
+                
+                <button class="btn" onclick="startProject()" id="startBtn">🎬 Bắt đầu xử lý</button>
+                
+                <div id="progressContainer" class="progress-container" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">0%</div>
+                    
+                    <div class="steps-container" id="stepsContainer">
+                        <!-- Steps will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📊 Trạng thái hiện tại</h2>
+                <div id="currentStatus">
+                    <p>Chưa có dự án nào đang chạy</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="projects-container">
+            <div class="queue-status" id="queueStatus">
+                <h3>📊 Trạng thái hàng đợi</h3>
+                <div class="queue-info">
+                    <span id="queueSize">Đang tải...</span>
+                    <span id="processorStatus">Đang tải...</span>
+                </div>
+                <div class="queue-actions" style="margin-top: 15px;">
+                    <button class="restart-all-btn" onclick="restartAllFailedProjects()" style="background: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-size: 14px;">
+                        🔄 Khởi động lại tất cả dự án lỗi
+                    </button>
+                </div>
+            </div>
+            
+            <h2>📋 Danh sách dự án</h2>
+            <div id="projectsList">
+                <!-- Projects will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentProject = null;
+        let projects = [];
+        let config = {};
+
+        // Load settings on page load
+        window.onload = function() {
+            loadSettings();
+            loadProjects();
+            setInterval(updateProjects, 2000);
+        };
+
+        function toggleSettings() {
+            const panel = document.getElementById('settingsPanel');
+            panel.classList.toggle('show');
+        }
+
+        function loadSettings() {
+            fetch('/api/config')
+                .then(response => response.json())
+                .then(data => {
+                    config = data;
+
+                    document.getElementById('ttsProvider').value = data.tts_provider || 'fpt';
+                    // FPT AI Keys - convert array to textarea
+                    const fptKeys = data.fpt_api_keys || [''];
+                    document.getElementById('fptApiKeys').value = fptKeys.join('\n');
+                    document.getElementById('fptVoice').value = data.fpt_voice || 'banmai';
+                    document.getElementById('fptSpeed').value = data.fpt_speed || '';
+                    document.getElementById('fptSpeechSpeed').value = data.fpt_speech_speed || '0.8';
+                    document.getElementById('fptFormat').value = data.fpt_format || 'mp3';
+                    document.getElementById('geminiApiKey').value = data.gemini_api_key || '';
+                    document.getElementById('assemblyaiApiKey').value = data.assemblyai_api_key || '';
+                    document.getElementById('sttLanguage').value = data.stt_language || 'en';
+                    document.getElementById('sttMethod').value = data.stt_method || 'utterances';
+                    document.getElementById('sttCharsPerCaption').value = data.stt_chars_per_caption || 200;
+                    document.getElementById('sttSpeechThreshold').value = data.stt_speech_threshold || 0.5;
+                    document.getElementById('sttDisfluencies').checked = data.stt_disfluencies || false;
+                    document.getElementById('useAiSegmentation').checked = data.use_ai_segmentation || true;
+                    document.getElementById('minSentenceLength').value = data.min_sentence_length || 20;
+                    document.getElementById('maxSentenceLength').value = data.max_sentence_length || 150;
+                    
+                    // Silence Remover settings
+                    document.getElementById('enableSilenceRemoval').checked = data.enable_silence_removal || true;
+                    document.getElementById('silenceThreshold').value = data.silence_threshold || -50.0;
+                    document.getElementById('minSilenceDuration').value = data.min_silence_duration || 0.4;
+                    document.getElementById('maxSilenceDuration').value = data.max_silence_duration || 2.0;
+                    document.getElementById('silencePadding').value = data.silence_padding || 0.1;
+                    
+                    // Proxy settings
+                    document.getElementById('proxyEnabled').checked = data.proxy_enabled || false;
+                    document.getElementById('proxyConfig').value = data.proxy_config || '';
+                });
+        }
+
+        function saveSettings() {
+            // Convert FPT API Keys từ textarea thành array
+            const fptKeysText = document.getElementById('fptApiKeys').value;
+            const fptKeysArray = fptKeysText.split('\n')
+                .map(key => key.trim())
+                .filter(key => key.length > 0);
+            
+            const settings = {
+                // FPT AI TTS settings với multiple keys
+                fpt_api_keys: fptKeysArray,
+                fpt_current_key_index: 0,  // Reset về key đầu tiên
+                fpt_voice: document.getElementById('fptVoice').value,
+                fpt_speed: document.getElementById('fptSpeed').value,
+                fpt_speech_speed: document.getElementById('fptSpeechSpeed').value,
+                fpt_format: document.getElementById('fptFormat').value,
+                
+                // AI Provider - chỉ Gemini
+                ai_provider: 'gemini',
+                gemini_api_key: document.getElementById('geminiApiKey').value,
+                
+                // AssemblyAI STT settings
+                assemblyai_api_key: document.getElementById('assemblyaiApiKey').value,
+                stt_language: document.getElementById('sttLanguage').value,
+                stt_method: document.getElementById('sttMethod').value,
+                stt_chars_per_caption: parseInt(document.getElementById('sttCharsPerCaption').value),
+                stt_speech_threshold: parseFloat(document.getElementById('sttSpeechThreshold').value),
+                stt_disfluencies: document.getElementById('sttDisfluencies').checked,
+                use_ai_segmentation: document.getElementById('useAiSegmentation').checked,
+                min_sentence_length: parseInt(document.getElementById('minSentenceLength').value),
+                max_sentence_length: parseInt(document.getElementById('maxSentenceLength').value),
+                
+                // Silence Remover settings
+                enable_silence_removal: document.getElementById('enableSilenceRemoval').checked,
+                silence_threshold: parseFloat(document.getElementById('silenceThreshold').value),
+                min_silence_duration: parseFloat(document.getElementById('minSilenceDuration').value),
+                max_silence_duration: parseFloat(document.getElementById('maxSilenceDuration').value),
+                silence_padding: parseFloat(document.getElementById('silencePadding').value),
+                
+                // Proxy settings
+                proxy_enabled: document.getElementById('proxyEnabled').checked,
+                proxy_config: document.getElementById('proxyConfig').value
+            };
+
+            fetch('/api/config', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(settings)
+            })
+            .then(response => response.json())
+            .then(data => {
+                config = settings;
+                showMessage('Cài đặt đã được lưu thành công!', 'success');
+            })
+            .catch(error => {
+                showMessage('Lỗi khi lưu cài đặt: ' + error.message, 'error');
+            });
+        }
+
+        function validateUrl(url) {
+            // Basic URL validation
+            try {
+                new URL(url);
+                return true;
+            } catch {
+                return false;
+            }
+        }
+
+        function startProject() {
+            const url = document.getElementById('videoUrl').value.trim();
+            const projectName = document.getElementById('projectName').value.trim();
+            if (!url) {
+                showMessage('Vui lòng nhập URL video!', 'error');
+                return;
+            }
+
+            // Validate URL format
+            if (!validateUrl(url)) {
+                showMessage('URL không hợp lệ! Vui lòng kiểm tra lại.', 'error');
+                return;
+            }
+
+            // Check for common video platforms
+            const supportedPlatforms = [
+                'youtube.com', 'youtu.be', 'tiktok.com', 'instagram.com',
+                'facebook.com', 'twitter.com', 'vimeo.com', 'dailymotion.com'
+            ];
+            
+            const urlLower = url.toLowerCase();
+            const isSupported = supportedPlatforms.some(platform => urlLower.includes(platform));
+            
+            if (!isSupported && !urlLower.includes('.mp4') && !urlLower.includes('.mov')) {
+                showMessage('URL không được hỗ trợ. Vui lòng sử dụng YouTube, TikTok, hoặc link video trực tiếp.', 'warning');
+            }
+
+            const musicFile = document.getElementById('musicFile').files[0];
+            const overlayFile = document.getElementById('overlayFile').files[0];
+
+            const formData = new FormData();
+            formData.append('url', url);
+
+            if (musicFile) {
+                formData.append('music_file', musicFile);
+            }
+            if (overlayFile) {
+                formData.append('overlay_file', overlayFile);
+            }
+
+            // Disable start button temporarily
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('startBtn').textContent = '⏳ Đang khởi tạo...';
+
+            // Show progress container
+            document.getElementById('progressContainer').style.display = 'block';
+
+            fetch('/api/start', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: url, name: projectName })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                currentProject = data;
+                updateProgress();
+                showMessage('Dự án đã được khởi tạo thành công!', 'success');
+            })
+            .catch(error => {
+                showMessage('Lỗi khi khởi tạo dự án: ' + error.message, 'error');
+                document.getElementById('startBtn').disabled = false;
+                document.getElementById('startBtn').textContent = '🎬 Thêm dự án mới';
+            });
+        }
+
+        function updateProgress() {
+            if (!currentProject) return;
+
+            fetch(`/api/projects/${currentProject.id}`)
+                .then(response => response.json())
+                .then(project => {
+                    currentProject = project;
+                    
+                    // Update progress bar
+                    const progressFill = document.getElementById('progressFill');
+                    const progressText = document.getElementById('progressText');
+                    progressFill.style.width = project.progress + '%';
+                    progressText.textContent = project.progress + '%';
+
+                    // Update steps
+                    updateSteps(project.steps);
+
+                    // Update current status
+                    updateCurrentStatus(project);
+
+                    // Enable start button for queue system - allow adding new projects even when one is running
+                    if (project.status === 'completed' || project.status === 'error' || project.status === 'running' || project.status === 'queued') {
+                        document.getElementById('startBtn').disabled = false;
+                        document.getElementById('startBtn').textContent = '🎬 Thêm dự án mới';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating progress:', error);
+                });
+        }
+
+        function updateSteps(steps) {
+            const stepsContainer = document.getElementById('stepsContainer');
+            
+            // Thêm nút "Retry All Failed Steps" nếu có step lỗi
+            const failedSteps = Object.keys(steps).filter(key => steps[key].status === 'error');
+            
+            const stepNames = {
+                'download': '📥 Tải video',
+                'slow': '🐌 Giảm tốc độ',
+                'stt': '🎤 Chuyển giọng nói thành văn bản',
+                'translate': '🌐 Dịch thuật',
+                'tts': '🔊 Tạo giọng nói (FPT AI)',
+                'replace_audio': '🔄 Thay thế âm thanh',
+                'silence_removal': '🔇 Cắt khoảng lặng',
+                'speed_up': '⚡ Tăng tốc độ',
+                'music': '🎵 Thêm nhạc nền',
+                'overlay': '🎨 Thêm overlay'
+            };
+
+            // Thứ tự logic đúng của các bước
+            const stepOrder = [
+                'download',
+                'slow', 
+                'stt',
+                'translate',
+                'tts',
+                'replace_audio',
+                'speed_up',
+                'silence_removal',
+                'music',
+                'overlay'
+            ];
+
+            stepsContainer.innerHTML = '';
+            
+            // Thêm nút retry all nếu có step lỗi
+            if (failedSteps.length > 0) {
+                const retryAllDiv = document.createElement('div');
+                retryAllDiv.style.marginBottom = '10px';
+                retryAllDiv.style.textAlign = 'center';
+                
+                const retryAllBtn = document.createElement('button');
+                retryAllBtn.className = 'retry-all-btn';
+                retryAllBtn.textContent = `🔄 Thử lại tất cả bước lỗi (${failedSteps.length})`;
+                retryAllBtn.onclick = () => retryAllFailedSteps(failedSteps);
+                retryAllBtn.style.backgroundColor = '#dc3545';
+                retryAllBtn.style.color = 'white';
+                retryAllBtn.style.border = 'none';
+                retryAllBtn.style.padding = '8px 16px';
+                retryAllBtn.style.borderRadius = '4px';
+                retryAllBtn.style.cursor = 'pointer';
+                retryAllBtn.style.fontSize = '14px';
+                retryAllBtn.style.fontWeight = 'bold';
+                retryAllBtn.style.marginBottom = '10px';
+                
+                retryAllDiv.appendChild(retryAllBtn);
+                stepsContainer.appendChild(retryAllDiv);
+            }
+            
+            // Hiển thị theo thứ tự logic thay vì thứ tự object
+            stepOrder.forEach(stepKey => {
+                if (steps[stepKey]) {
+                    const stepData = steps[stepKey];
+                    const stepDiv = document.createElement('div');
+                    stepDiv.className = `step ${stepData.status}`;
+                    
+                    const icon = document.createElement('div');
+                    icon.className = 'step-icon';
+                    icon.textContent = stepData.status === 'completed' ? '✓' : 
+                                     stepData.status === 'running' ? '⟳' : '○';
+                    
+                    const stepContent = document.createElement('div');
+                    stepContent.className = 'step-content';
+                    
+                    const text = document.createElement('span');
+                    text.className = 'step-text';
+                    text.textContent = stepNames[stepKey] || stepKey;
+                    
+                    // Thêm thông tin lỗi nếu có
+                    if (stepData.status === 'error' && stepData.error) {
+                        const errorInfo = document.createElement('div');
+                        errorInfo.className = 'step-error';
+                        errorInfo.textContent = `Lỗi: ${stepData.error}`;
+                        errorInfo.style.fontSize = '12px';
+                        errorInfo.style.color = '#dc3545';
+                        errorInfo.style.marginTop = '4px';
+                        stepContent.appendChild(errorInfo);
+                    }
+                    
+                    const retryBtn = document.createElement('button');
+                    retryBtn.className = 'retry-btn';
+                    retryBtn.textContent = stepData.status === 'error' ? '🔄 Thử lại' : '🔄 Chạy từ bước này';
+                    retryBtn.onclick = () => retryStepFromStep(stepKey);
+                    retryBtn.disabled = stepData.status === 'running';
+                    
+                    // Hiển thị nút retry cho tất cả các step (trừ đang chạy)
+                    if (stepData.status === 'running') {
+                        retryBtn.style.display = 'none';
+                    } else {
+                        retryBtn.style.display = 'inline-block';
+                        // Thay đổi style dựa trên trạng thái
+                        if (stepData.status === 'error') {
+                            retryBtn.style.backgroundColor = '#dc3545';
+                            retryBtn.style.color = 'white';
+                        } else if (stepData.status === 'completed') {
+                            retryBtn.style.backgroundColor = '#6c757d';
+                            retryBtn.style.color = 'white';
+                        } else {
+                            retryBtn.style.backgroundColor = '#007bff';
+                            retryBtn.style.color = 'white';
+                        }
+                    }
+
+                    stepContent.appendChild(text);
+                    stepContent.appendChild(retryBtn);
+                    
+                    stepDiv.appendChild(icon);
+                    stepDiv.appendChild(stepContent);
+                    stepsContainer.appendChild(stepDiv);
+                }
+            });
+        }
+
+        function updateCurrentStatus(project) {
+            const statusDiv = document.getElementById('currentStatus');
+            const statusTexts = {
+                'starting': 'Đang khởi tạo dự án...',
+                'running': 'Đang xử lý video...',
+                'completed': 'Hoàn thành!',
+                'error': 'Có lỗi xảy ra'
+            };
+
+            let errorHtml = '';
+            if (project.status === 'error' && project.error) {
+                errorHtml = `<p class="error-message">Lỗi: ${project.error}</p>`;
+                
+                // Thêm gợi ý nếu là lỗi download
+                if (project.error.includes('403 Forbidden') || project.error.includes('không thể truy cập')) {
+                    errorHtml += `
+                        <div class="warning-message">
+                            <strong>💡 Gợi ý:</strong><br>
+                            • Thử URL khác từ danh sách: <a href="#" onclick="showWorkingUrls()">Xem URLs hoạt động</a><br>
+                            • Kiểm tra video có private/restricted không<br>
+                            • Thử video ngắn hơn
+                        </div>
+                    `;
+                }
+            }
+
+            statusDiv.innerHTML = `
+                <h3>${project.url}</h3>
+                <p><strong>Trạng thái:</strong> ${statusTexts[project.status] || project.status}</p>
+                <p><strong>Bước hiện tại:</strong> ${project.current_step || 'N/A'}</p>
+                <p><strong>Tiến độ:</strong> ${project.progress}%</p>
+                ${project.status === 'completed' ? 
+                    `<button class="download-btn" onclick="downloadProject('${project.id}')">📥 Tải xuống kết quả</button>` : ''}
+                ${errorHtml}
+            `;
+        }
+
+        function retryStepFromStep(stepKey) {
+            if (!currentProject) {
+                showMessage('Không có dự án nào đang chạy', 'error');
+                return;
+            }
+            
+            // Disable retry button
+            const retryBtn = event.target;
+            retryBtn.disabled = true;
+            retryBtn.textContent = '⏳ Đang xử lý...';
+            
+            // Hiển thị thông báo
+            showMessage(`Đang chạy lại từ bước: ${stepNames[stepKey] || stepKey}...`, 'info');
+            
+            fetch(`/api/restart-from-step/${currentProject.id}/${stepKey}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    showMessage(`Đã bắt đầu chạy lại từ bước: ${stepNames[stepKey] || stepKey}`, 'success');
+                    // Cập nhật trạng thái ngay lập tức
+                    updateProgress();
+                } else {
+                    showMessage(`Lỗi: ${data.error}`, 'error');
+                    // Re-enable retry button
+                    retryBtn.disabled = false;
+                    retryBtn.textContent = '🔄 Thử lại';
+                }
+            })
+            .catch(error => {
+                showMessage(`Lỗi kết nối: ${error.message}`, 'error');
+                // Re-enable retry button
+                retryBtn.disabled = false;
+                retryBtn.textContent = '🔄 Thử lại';
+            });
+        }
+        
+        function retryStep(stepKey) {
+            if (!currentProject) {
+                showMessage('Không có dự án nào đang chạy', 'error');
+                return;
+            }
+            
+            // Disable retry button
+            const retryBtn = event.target;
+            retryBtn.disabled = true;
+            retryBtn.textContent = '⏳ Đang xử lý...';
+            
+            // Hiển thị thông báo
+            showMessage(`Đang chạy lại bước: ${stepNames[stepKey] || stepKey}...`, 'info');
+            
+            fetch(`/api/retry/${currentProject.id}/${stepKey}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    showMessage(`Đã bắt đầu chạy lại bước: ${stepNames[stepKey] || stepKey}`, 'success');
+                    // Cập nhật trạng thái ngay lập tức
+                    updateProgress();
+                } else {
+                    showMessage(`Lỗi: ${data.error}`, 'error');
+                    // Re-enable retry button
+                    retryBtn.disabled = false;
+                    retryBtn.textContent = '🔄 Thử lại';
+                }
+            })
+            .catch(error => {
+                showMessage(`Lỗi kết nối: ${error.message}`, 'error');
+                // Re-enable retry button
+                retryBtn.disabled = false;
+                retryBtn.textContent = '🔄 Thử lại';
+            });
+        }
+
+        function retryAllFailedSteps(failedSteps) {
+            if (!currentProject || !failedSteps || failedSteps.length === 0) {
+                showMessage('Không có bước nào bị lỗi', 'info');
+                return;
+            }
+            
+            // Disable retry all button
+            const retryAllBtn = event.target;
+            retryAllBtn.disabled = true;
+            retryAllBtn.textContent = '⏳ Đang xử lý...';
+            
+            showMessage(`Đang thử lại ${failedSteps.length} bước bị lỗi...`, 'info');
+            
+            let completedCount = 0;
+            let errorCount = 0;
+            
+            // Retry từng step một cách tuần tự
+            failedSteps.forEach((stepKey, index) => {
+                setTimeout(() => {
+                    fetch(`/api/retry/${currentProject.id}/${stepKey}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            completedCount++;
+                            showMessage(`✅ Đã bắt đầu retry: ${stepNames[stepKey] || stepKey}`, 'success');
+                        } else {
+                            errorCount++;
+                            showMessage(`❌ Lỗi retry ${stepNames[stepKey] || stepKey}: ${data.error}`, 'error');
+                        }
+                        
+                        // Kiểm tra nếu đã xử lý hết tất cả
+                        if (completedCount + errorCount === failedSteps.length) {
+                            showMessage(`Hoàn thành retry: ${completedCount} thành công, ${errorCount} lỗi`, 'info');
+                            // Re-enable button
+                            retryAllBtn.disabled = false;
+                            retryAllBtn.textContent = `🔄 Thử lại tất cả bước lỗi`;
+                            // Update progress immediately
+                            updateProgress();
+                        }
+                    })
+                    .catch(error => {
+                        errorCount++;
+                        showMessage(`❌ Lỗi retry ${stepNames[stepKey] || stepKey}: ${error.message}`, 'error');
+                        
+                        if (completedCount + errorCount === failedSteps.length) {
+                            retryAllBtn.disabled = false;
+                            retryAllBtn.textContent = `🔄 Thử lại tất cả bước lỗi`;
+                        }
+                    });
+                }, index * 1000); // Delay 1 giây giữa các request
+            });
+        }
+
+        function showWorkingUrls() {
+            const urls = [
+                'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'https://www.youtube.com/watch?v=9bZkp7q19f0',
+                'https://www.youtube.com/watch?v=kJQP7kiw5Fk'
+            ];
+            
+            const urlList = urls.map(url => `<li><code>${url}</code></li>`).join('');
+            
+            showMessage(`
+                <strong>🎬 URLs hoạt động tốt:</strong><br>
+                <ul>${urlList}</ul>
+                Copy và paste một trong các URL trên để thử lại!
+            `, 'success');
+        }
+
+        function loadProjects() {
+            fetch('/api/projects')
+                .then(response => response.json())
+                .then(data => {
+                    projects = data;
+                    updateProjectsList();
+                });
+        }
+
+        function updateProjects() {
+            if (currentProject && (currentProject.status === 'running' || currentProject.status === 'starting')) {
+                updateProgress();
+            }
+            loadProjects();
+            updateQueueStatusPeriodically();
+        }
+        
+        function updateQueueStatusPeriodically() {
+            fetch('/api/queue/status')
+                .then(response => response.json())
+                .then(queueData => {
+                    updateQueueStatus(queueData);
+                })
+                .catch(error => {
+                    console.error('Error updating queue status:', error);
+                });
+        }
+        
+        function updateQueueStatus(queueData) {
+            const queueSizeSpan = document.getElementById('queueSize');
+            const processorStatusSpan = document.getElementById('processorStatus');
+            
+            queueSizeSpan.textContent = `📋 Hàng đợi: ${queueData.queue_size} dự án`;
+            processorStatusSpan.textContent = queueData.processor_running ? 
+                '✅ Queue processor đang chạy' : '⚠️ Queue processor dừng';
+        }
+
+        function updateProjectsList() {
+            const projectsList = document.getElementById('projectsList');
+            if (projects.length === 0) {
+                projectsList.innerHTML = '<p>Chưa có dự án nào</p>';
+                return;
+            }
+
+            projectsList.innerHTML = projects.map(project => `
+                <div class="project-card" onclick="selectProject('${project.id}')" style="cursor: pointer;">
+                    <div class="project-header">
+                        <div class="project-title">${project.name || `Dự án ${project.id.slice(0, 8)}...`}</div>
+                        <div class="project-status status-${project.status}">${project.status}</div>
+                    </div>
+                    <div class="project-url">${project.url}</div>
+                    <p><strong>Tiến độ:</strong> ${project.progress}%</p>
+                    <p><strong>Bước hiện tại:</strong> ${project.current_step || 'N/A'}</p>
+                    ${project.status === 'queued' && project.queue_position ? 
+                        `<p><strong>📋 Vị trí trong hàng đợi:</strong> ${project.queue_position}</p>` : ''}
+                    <div class="project-actions">
+                        ${project.status === 'completed' ? 
+                            `<button class="download-btn" onclick="downloadProject('${project.id}'); event.stopPropagation();">📥 Tải xuống</button>` : ''}
+                        ${project.status === 'running' ? 
+                            `<button class="stop-btn" onclick="stopProject('${project.id}'); event.stopPropagation();">⏹️ Dừng</button>` :
+                            `<button class="restart-btn" onclick="restartProject('${project.id}'); event.stopPropagation();">🔄 Bắt đầu lại</button>`
+                        }
+                        <button class="delete-btn" onclick="deleteProject('${project.id}'); event.stopPropagation();">🗑️ Xóa</button>
+                    </div>
+                    ${project.status === 'error' ? 
+                        `<p class="error-message">Lỗi: ${project.error || 'Không xác định'}</p>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function downloadProject(projectId) {
+            window.open(`/api/download/${projectId}`, '_blank');
+        }
+        
+        function stopProject(projectId) {
+            if (confirm('Bạn có chắc chắn muốn dừng dự án này? Tiến trình hiện tại sẽ bị dừng lại.')) {
+                // Disable nút stop để tránh click nhiều lần
+                const stopBtn = event.target;
+                stopBtn.disabled = true;
+                stopBtn.textContent = '⏹️ Đang dừng...';
+                
+                fetch(`/api/stop/${projectId}`, {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        showMessage('Dự án đã được dừng thành công!', 'success');
+                        // Reload danh sách dự án
+                        loadProjects();
+                    } else {
+                        showMessage('Lỗi khi dừng dự án: ' + (data.error || 'Không xác định'), 'error');
+                        // Re-enable nút stop
+                        stopBtn.disabled = false;
+                        stopBtn.textContent = '⏹️ Dừng';
+                    }
+                })
+                .catch(error => {
+                    showMessage('Lỗi khi dừng dự án: ' + error.message, 'error');
+                    // Re-enable nút stop
+                    stopBtn.disabled = false;
+                    stopBtn.textContent = '⏹️ Dừng';
+                });
+            }
+        }
+        
+        function restartProject(projectId) {
+            if (confirm('Bạn có chắc chắn muốn bắt đầu lại dự án này? Tất cả tiến trình hiện tại sẽ bị xóa và bắt đầu từ đầu.')) {
+                // Disable nút restart để tránh click nhiều lần
+                const restartBtn = event.target;
+                restartBtn.disabled = true;
+                restartBtn.textContent = '🔄 Đang khởi động lại...';
+                
+                fetch(`/api/restart/${projectId}`, {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        showMessage('Dự án đã được khởi động lại thành công!', 'success');
+                        // Reload danh sách dự án
+                        loadProjects();
+                    } else {
+                        showMessage('Lỗi khi khởi động lại dự án: ' + (data.error || 'Không xác định'), 'error');
+                        // Re-enable nút restart
+                        restartBtn.disabled = false;
+                        restartBtn.textContent = '🔄 Bắt đầu lại';
+                    }
+                })
+                .catch(error => {
+                    showMessage('Lỗi khi khởi động lại dự án: ' + error.message, 'error');
+                    // Re-enable nút restart
+                    restartBtn.disabled = false;
+                    restartBtn.textContent = '🔄 Bắt đầu lại';
+                });
+            }
+        }
+        
+        function restartAllFailedProjects() {
+            const failedProjects = projects.filter(p => p.status === 'error');
+            
+            if (failedProjects.length === 0) {
+                showMessage('Không có dự án nào bị lỗi để khởi động lại', 'info');
+                return;
+            }
+            
+            if (confirm(`Bạn có chắc chắn muốn khởi động lại ${failedProjects.length} dự án bị lỗi? Tất cả tiến trình hiện tại sẽ bị xóa và bắt đầu từ đầu.`)) {
+                // Disable nút restart all
+                const restartAllBtn = event.target;
+                restartAllBtn.disabled = true;
+                restartAllBtn.textContent = `🔄 Đang khởi động lại ${failedProjects.length} dự án...`;
+                
+                let completedCount = 0;
+                let errorCount = 0;
+                
+                // Restart từng project một
+                failedProjects.forEach((project, index) => {
+                    setTimeout(() => {
+                        fetch(`/api/restart/${project.id}`, {
+                            method: 'POST'
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            completedCount++;
+                            if (data.status === 'success') {
+                                console.log(`✅ Restarted project ${project.id}`);
+                            } else {
+                                errorCount++;
+                                console.log(`❌ Failed to restart project ${project.id}: ${data.error}`);
+                            }
+                            
+                            // Kiểm tra nếu đã hoàn thành tất cả
+                            if (completedCount + errorCount === failedProjects.length) {
+                                // Re-enable nút restart all
+                                restartAllBtn.disabled = false;
+                                restartAllBtn.textContent = '🔄 Khởi động lại tất cả dự án lỗi';
+                                
+                                // Hiển thị kết quả
+                                if (errorCount === 0) {
+                                    showMessage(`✅ Đã khởi động lại thành công ${completedCount} dự án!`, 'success');
+                                } else {
+                                    showMessage(`⚠️ Đã khởi động lại ${completedCount} dự án thành công, ${errorCount} dự án thất bại`, 'warning');
+                                }
+                                
+                                // Reload danh sách dự án
+                                loadProjects();
+                            }
+                        })
+                        .catch(error => {
+                            errorCount++;
+                            console.log(`❌ Error restarting project ${project.id}: ${error.message}`);
+                            
+                            // Kiểm tra nếu đã hoàn thành tất cả
+                            if (completedCount + errorCount === failedProjects.length) {
+                                // Re-enable nút restart all
+                                restartAllBtn.disabled = false;
+                                restartAllBtn.textContent = '🔄 Khởi động lại tất cả dự án lỗi';
+                                
+                                showMessage(`⚠️ Đã khởi động lại ${completedCount} dự án thành công, ${errorCount} dự án thất bại`, 'warning');
+                                
+                                // Reload danh sách dự án
+                                loadProjects();
+                            }
+                        });
+                    }, index * 1000); // Delay 1 giây giữa các request để tránh overload
+                });
+            }
+        }
+        
+        function deleteProject(projectId) {
+            if (confirm('Bạn có chắc chắn muốn xóa dự án này? Dữ liệu sẽ bị xóa vĩnh viễn.')) {
+                fetch(`/api/delete/${projectId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        showMessage('Dự án đã được xóa thành công!', 'success');
+                        // Reload danh sách dự án
+                        loadProjects();
+                    } else {
+                        showMessage('Lỗi khi xóa dự án: ' + (data.error || 'Không xác định'), 'error');
+                    }
+                })
+                .catch(error => {
+                    showMessage('Lỗi khi xóa dự án: ' + error.message, 'error');
+                });
+            }
+        }
+        
+        function selectProject(projectId) {
+            // Tìm project trong danh sách
+            const selectedProject = projects.find(p => p.id === projectId);
+            if (!selectedProject) return;
+            
+            // Cập nhật currentProject để hiển thị tiến trình
+            currentProject = selectedProject;
+            
+            // Cập nhật UI để highlight project được chọn
+            updateProjectsList();
+            
+            // Hiển thị tiến trình của project được chọn
+            updateProgress();
+            
+            // Highlight project được chọn
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach(card => {
+                card.classList.remove('selected');
+                // Tìm card chứa project ID
+                const projectTitle = card.querySelector('.project-title');
+                if (projectTitle && projectTitle.textContent.includes(projectId.slice(0, 8))) {
+                    card.classList.add('selected');
+                }
+            });
+            
+            console.log(`Selected project: ${projectId}`);
+        }
+
+        function showMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            let className = 'success-message';
+            
+            if (type === 'error') {
+                className = 'error-message';
+            } else if (type === 'warning') {
+                className = 'warning-message';
+            }
+            
+            messageDiv.className = className;
+            messageDiv.innerHTML = message;  // Sử dụng innerHTML để hỗ trợ HTML
+            
+            document.querySelector('.container').insertBefore(messageDiv, document.querySelector('.header'));
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 8000);  // Tăng thời gian hiển thị cho messages có HTML
+        }
+    </script>
+</body>
+</html>

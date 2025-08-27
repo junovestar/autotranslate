@@ -1,0 +1,117 @@
+1
+00:00:01,600 --> 00:00:05,120
+Chào mọi người, mình muốn giới thiệu nhanh
+
+2
+00:00:05,620 --> 00:00:09,360
+về cộng đồng Automation Squad mà bên mình
+
+3
+00:00:09,520 --> 00:00:14,960
+đã xây dựng. Nếu bạn muốn giá trị tức thì miễn phí,
+
+4
+00:00:15,460 --> 00:00:18,800
+thì bên mình đã tập hợp rất nhiều thứ.
+
+5
+00:00:18,880 --> 00:00:22,480
+Chúng mình có bản tin hằng ngày.
+Nó sẽ nói về
+
+6
+00:00:24,320 --> 00:00:28,080
+các gợi ý, mẹo hữu ích,
+
+7
+00:00:28,160 --> 00:00:31,910
+và những tin tức mới nhất.
+
+8
+00:00:31,980 --> 00:00:35,900
+Chúng mình phân tích rõ vì sao bạn nên quan tâm
+
+9
+00:00:36,860 --> 00:00:39,020
+và ai nên quan tâm.
+
+10
+00:00:39,820 --> 00:00:43,060
+Vấn đề này giải quyết gì?
+
+11
+00:00:43,560 --> 00:00:47,820
+Ví dụ nếu đó là một công cụ. Và những gợi ý rất phức tạp,
+
+12
+00:00:47,900 --> 00:00:51,500
+chứ không phải mấy thứ cơ bản mà bạn có thể tìm thấy
+
+13
+00:00:52,000 --> 00:00:55,100
+ở khắp mọi nơi. Hãy xem thử nhé.
+
+14
+00:00:55,600 --> 00:00:59,500
+Và nếu bạn vào phần lớp học,
+
+15
+00:01:00,490 --> 00:01:05,130
+chúng mình có mẫu tự động hóa N8N, gợi ý và công cụ.
+
+16
+00:01:05,930 --> 00:01:09,850
+Nếu bạn vào đây, có rất nhiều
+
+17
+00:01:10,010 --> 00:01:14,210
+mẫu tự động hóa N8N mà
+
+18
+00:01:14,710 --> 00:01:19,050
+chúng mình đã tìm thấy trên mạng và
+
+19
+00:01:19,550 --> 00:01:24,050
+tập hợp lại một chỗ. Có hàng ngàn
+
+20
+00:01:24,550 --> 00:01:28,010
+mẫu miễn phí. Chúng vốn dĩ
+
+21
+00:01:28,250 --> 00:01:31,540
+được cung cấp miễn phí, nhưng
+
+22
+00:01:32,040 --> 00:01:35,700
+bị rải rác. Nên chúng mình tập hợp lại một chỗ cho
+
+23
+00:01:36,200 --> 00:01:40,180
+các bạn. Nếu bạn quay lại, bạn sẽ thấy gợi ý và
+
+24
+00:01:40,680 --> 00:01:44,420
+công cụ, toàn là những gợi ý phức tạp
+
+25
+00:01:44,580 --> 00:01:47,780
+mà chúng mình thích xây dựng và những gợi ý đã tìm
+
+26
+00:01:47,860 --> 00:01:51,620
+và mua được quyền cung cấp
+
+27
+00:01:52,120 --> 00:01:55,980
+miễn phí. Còn Công cụ là thư mục công cụ
+
+28
+00:01:56,480 --> 00:01:59,660
+tuyệt vời. Vậy nên, hãy xem thử.
+
+29
+00:02:00,160 --> 00:02:01,680
+Mong các bạn thích nó.
+Cho mình biết ý kiến nhé.
